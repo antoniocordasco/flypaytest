@@ -11,10 +11,6 @@
 header('Content-Type:application/json');
 require '../common.php';
 
-spl_autoload_register(function ($class) {
-    include str_replace('\\', '/', $class) . '.php';
-});
-
 $split = explode('/', trim($_SERVER['REQUEST_URI'], '/'));
 
 $className = ucfirst(strtolower($split[0]));
