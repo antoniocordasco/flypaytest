@@ -21,6 +21,16 @@ class ItemsDAO extends BaseDAO
         return $items;
     }
 
+    public function getOrderedItems()
+    {
+        $items = json_decode($_COOKIE['items']);
+
+        if (!$items) {
+            $items = [];
+        }
+        return $items;
+    }
+
     /**
      * Gets an item by id.
      *

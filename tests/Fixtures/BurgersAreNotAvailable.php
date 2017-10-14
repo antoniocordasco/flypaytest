@@ -16,6 +16,7 @@ class BurgersAreNotAvailable
 
         $mock = \Mockery::mock('\DataAccess\ItemsDAO');
         $mock->shouldReceive('getItemById')->andReturn($return);
+        $mock->shouldReceive('getOrderedItems')->andReturn([]);
         \DataAccess\ItemsDAO::setInstance($mock);
     }
 }

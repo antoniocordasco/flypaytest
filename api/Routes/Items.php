@@ -28,17 +28,13 @@ class Items
      */
     public function orderItemAction($args)
     {
-        $id = (int) ($args['id']);
-        $quantity = (int) ($args['quantity']) ? (int) ($args['quantity']) : 1;
+        $id = (int)($args['id']);
+        $quantity = (int)($args['quantity']) ? (int)($args['quantity']) : 1;
 
         $itemsDAO = ItemsDAO::getInstance();
         $item = $itemsDAO->getItemById($id);
 
-        $items = json_decode($_COOKIE['items']);
-
-        if (!$items) {
-            $items = [];
-        }
+        $items = $itemsDAO->getOrderedItems();
 
         if ($item && $item->available) {
             for ($i = 0; $i < $quantity; ++$i) {
@@ -73,14 +69,11 @@ class Items
      */
     public function cancelItemAction($args)
     {
-        $id = (int) ($args['id']);
-        $quantity = (int) ($args['quantity']) ? (int) ($args['quantity']) : 1;
+        $id = (int)($args['id']);
+        $quantity = (int)($args['quantity']) ? (int)($args['quantity']) : 1;
 
-        $items = json_decode($_COOKIE['items']);
-
-        if (!$items) {
-            $items = [];
-        }
+        $itemsDAO = ItemsDAO::getInstance();
+        $items = $itemsDAO->getOrderedItems();
 
         $deleted = 0;
         $count = count($items);
