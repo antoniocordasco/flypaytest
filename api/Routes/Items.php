@@ -3,6 +3,7 @@
 namespace Routes;
 
 use DataAccess\ItemsDAO as ItemsDAO;
+use Mockery\Exception;
 
 // base class with member properties and methods
 class Items
@@ -37,7 +38,7 @@ class Items
         $id = (int) ($args['id']);
         $quantity = (int) ($args['quantity']) ? (int) ($args['quantity']) : 1;
 
-        $itemsDAO = new ItemsDAO();
+        $itemsDAO = ItemsDAO::getInstance();
         $item = $itemsDAO->getItemById($id);
 
         $items = json_decode($_COOKIE['items']);
@@ -54,9 +55,9 @@ class Items
             setcookie('items', json_encode($items), 0, '/');
 
             return count($items);
+        } else {
+            throw new Exception('The requested item is not available');
         }
-
-        return 'error';
     }
 
     /**
@@ -116,6 +117,10 @@ class Items
 
         header('Content-type: application/json');
 
-        echo json_encode($this->$action($_GET));
+        try {
+            echo json_encode($this->$action($_GET));
+        } catch (Exception $e) {
+            http_response_code(403);
+        }
     }
 }

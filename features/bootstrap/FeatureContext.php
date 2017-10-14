@@ -22,11 +22,27 @@ class FeatureContext implements Context
     }
 
     /**
-     * @Given /^there are three items in the menu$/
+     * @Given there are three items in the menu
      */
     public function thereAreThreeItemsInTheMenu()
     {
         $this->fixtureClass = 'ThereAreThreeItemsInTheMenu';
+    }
+
+    /**
+     * @Given burgers are available
+     */
+    public function burgersAreAvailable()
+    {
+        $this->fixtureClass = 'BurgersAreAvailable';
+    }
+
+    /**
+     * @Given burgers are not available
+     */
+    public function burgersAreNotAvailable()
+    {
+        $this->fixtureClass = 'BurgersAreNotAvailable';
     }
 
     /**
@@ -42,7 +58,11 @@ class FeatureContext implements Context
         }
         $client = new \GuzzleHttp\Client();
 
-        $this->_response = $client->request($httpMethod, 'http://localhost:8000' . $resource, $options);
+        try {
+            $this->_response = $client->request($httpMethod, 'http://localhost:8000' . $resource, $options);
+        } catch (Exception $e) {
+            $this->_statusCode = $e->getCode();
+        }
 
     }
 
@@ -53,6 +73,16 @@ class FeatureContext implements Context
     {
         if (json_decode($string) != json_decode($this->_response->getBody(true))) {
             throw new Exception("Wrong response: " . $this->_response->getBody(true) . "\n");
+        }
+    }
+
+    /**
+     * @Then /^the response code should be "([^"]*)"$/
+     */
+    public function theResponseCodeShouldBe($code)
+    {
+        if ($code != $this->_statusCode) {
+            throw new Exception("Wrong status code: " . $this->_statusCode . "\n");
         }
     }
 }

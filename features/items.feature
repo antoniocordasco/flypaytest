@@ -26,3 +26,16 @@ Feature: items
               }
           }
             """
+
+  Scenario: Order an item that is available
+    Given burgers are available
+    When I request "GET /items/orderItem/?id=2&quantity=3"
+    Then I should get:
+            """
+            3
+            """
+
+  Scenario: Order an item that is not available
+    Given burgers are not available
+    When I request "GET /items/orderItem/?id=2&quantity=3"
+    Then the response code should be "403"
