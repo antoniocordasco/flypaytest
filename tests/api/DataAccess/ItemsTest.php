@@ -25,4 +25,16 @@ class ItemsTest extends \PHPUnit_Framework_TestCase
         $chips = new \Models\Item(3, 'Chips', 3);
         $this->assertEquals($chips, $itemsDAO->getItemById(3));
     }
+
+    /**
+     * Unit test for ItemsDAO::setOrderedItems and ItemsDAO::getOrderedItems
+     */
+    public function testSetGetOrderedItems()
+    {
+        $orderedItems = [new \Models\Item(1, 'Salad', 7)];
+
+        $itemsDAO = ItemsDAO::getInstance();
+        $itemsDAO->setOrderedItems($orderedItems);
+        $this->assertEquals(json_decode(json_encode($orderedItems)), $itemsDAO->getOrderedItems());
+    }
 }
