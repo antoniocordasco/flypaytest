@@ -49,7 +49,7 @@ class Items
 
             return count($items);
         } else {
-            throw new Exception('The requested item is not available');
+            throw new Exception('The requested item is not available', 403);
         }
     }
 
@@ -113,7 +113,7 @@ class Items
         try {
             echo json_encode($this->$action($_GET));
         } catch (Exception $e) {
-            http_response_code(403);
+            http_response_code($e->getCode());
         }
     }
 }
