@@ -10,6 +10,9 @@
 
 namespace Routes;
 
+
+
+
 // base class with member properties and methods
 class Items
 {
@@ -19,15 +22,14 @@ class Items
 
     public function listAction()
     {
-        $items = new \DataAccess\Items();
-
+        $items = \DataAccess\Items::getInstance();
         return $items->getAll();
     }
 
     public function orderItemAction($args)
     {
-        $id = (int) ($args['id']);
-        $quantity = (int) ($args['quantity']) ? (int) ($args['quantity']) : 1;
+        $id = (int)($args['id']);
+        $quantity = (int)($args['quantity']) ? (int)($args['quantity']) : 1;
 
         $itemsDataAccess = new \DataAccess\Items();
         $item = $itemsDataAccess->getItemById($id);
@@ -59,8 +61,8 @@ class Items
 
     public function cancelItemAction($args)
     {
-        $id = (int) ($args['id']);
-        $quantity = (int) ($args['quantity']) ? (int) ($args['quantity']) : 1;
+        $id = (int)($args['id']);
+        $quantity = (int)($args['quantity']) ? (int)($args['quantity']) : 1;
 
         $items = json_decode($_COOKIE['items']);
 

@@ -7,6 +7,7 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
+require_once __DIR__ . '/vendor/autoload.php';
 
 spl_autoload_register(function ($class) {
     $path = str_replace('\\', '/', $class) . '.php';
@@ -15,9 +16,16 @@ spl_autoload_register(function ($class) {
         include $path;
         return;
     }
-    $path = 'api/' . $path;
-    if (is_file($path)) {
-        include $path;
+    if (is_file(dirname(__FILE__) . 'api/' . $path)) {
+        include dirname(__FILE__) . 'api/' . $path;
         return;
     }
 });
+
+// loading the appropriate fixture. Needed by behat tests
+if (isset($_SERVER['HTTP_X_MOCK_FIXTURE'])) {
+    include 'tests/Fixtures/' . $_SERVER['HTTP_X_MOCK_FIXTURE'].'.php';
+    $className = '\\Fixtures\\' . $_SERVER['HTTP_X_MOCK_FIXTURE'];
+    $mock = new $className;
+    $mock->load();
+}
