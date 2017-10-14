@@ -56,8 +56,8 @@ class Items
      */
     public function cancelAllItemsAction($args)
     {
-        $items = [];
-        setcookie('items', json_encode($items), 0, '/');
+        $itemsDAO = ItemsDAO::getInstance();
+        $itemsDAO->setOrderedItems([]);
         return 0;
     }
 
@@ -89,7 +89,7 @@ class Items
             $updatedItems[] = $item;
         }
 
-        setcookie('items', json_encode($updatedItems), 0, '/');
+        $itemsDAO->setOrderedItems($updatedItems);
 
         return count($items);
     }

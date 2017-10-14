@@ -21,6 +21,11 @@ class ItemsDAO extends BaseDAO
         return $items;
     }
 
+    /**
+     * Rethrieves the ordered items from the relative cookie
+     *
+     * @return array|mixed
+     */
     public function getOrderedItems()
     {
         $items = json_decode($_COOKIE['items']);
@@ -29,6 +34,16 @@ class ItemsDAO extends BaseDAO
             $items = [];
         }
         return $items;
+    }
+
+    /**
+     * Stores the ordered items in a cookie
+     *
+     * @param $items
+     */
+    public function setOrderedItems($items)
+    {
+        setcookie('items', json_encode($items), 0, '/');
     }
 
     /**
