@@ -9,6 +9,9 @@ use \DataAccess\ItemsDAO as ItemsDAO;
 
 class ItemsTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * Unit test for ItemsDAO::getItemById
+     */
     public function testGetItemById()
     {
         $itemsDAO = ItemsDAO::getInstance();

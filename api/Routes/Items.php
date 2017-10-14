@@ -7,10 +7,18 @@ use DataAccess\ItemsDAO as ItemsDAO;
 // base class with member properties and methods
 class Items
 {
+    /**
+     * Items constructor.
+     */
     public function __construct()
     {
     }
 
+    /**
+     * Controller action to list all items.
+     *
+     * @return array
+     */
     public function listAction()
     {
         $items = ItemsDAO::getInstance();
@@ -18,6 +26,12 @@ class Items
         return $items->getAll();
     }
 
+    /**
+     * Controller action to order an item.
+     *
+     * @param $args
+     * @return int|string
+     */
     public function orderItemAction($args)
     {
         $id = (int) ($args['id']);
@@ -45,12 +59,23 @@ class Items
         return 'error';
     }
 
+    /**
+     * Controller action to cancel all orders.
+     *
+     * @param $args
+     */
     public function cancelAllItemsAction($args)
     {
         $items = [];
         setcookie('items', json_encode($items), 0, '/');
     }
 
+    /**
+     * Controller action to cancel the order of a specific item.
+     *
+     * @param $args
+     * @return int
+     */
     public function cancelItemAction($args)
     {
         $id = (int) ($args['id']);
@@ -81,6 +106,9 @@ class Items
         return count($items);
     }
 
+    /**
+     * Runs a specific action.
+     */
     public function run()
     {
         $split = explode('/', trim($_SERVER['REQUEST_URI'], '/'));

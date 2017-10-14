@@ -18,6 +18,9 @@ class ThereAreThreeItemsInTheMenu
     {
     }
 
+    /**
+     * Loads the context's mocked DAOs
+     */
     public function load()
     {
         $return = [];

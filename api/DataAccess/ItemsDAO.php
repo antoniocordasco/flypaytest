@@ -7,10 +7,18 @@ use \Models\Item as Item;
 // base class with member properties and methods
 class ItemsDAO extends BaseDAO
 {
+    /**
+     * ItemsDAO constructor.
+     */
     public function __construct()
     {
     }
 
+    /**
+     * Returns all items, even the ones that are not available.
+     *
+     * @return array
+     */
     public function getAll()
     {
         $items = [];
@@ -20,7 +28,12 @@ class ItemsDAO extends BaseDAO
         return $items;
     }
 
-
+    /**
+     * Gets an item by id.
+     *
+     * @param $id
+     * @return Item
+     */
     function getItemById($id)
     {
         switch ($id) {
