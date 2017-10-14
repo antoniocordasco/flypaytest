@@ -62,6 +62,7 @@ class Items
     {
         $items = [];
         setcookie('items', json_encode($items), 0, '/');
+        return 0;
     }
 
     /**
