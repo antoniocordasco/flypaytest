@@ -35,6 +35,9 @@ class ItemsTest extends \PHPUnit_Framework_TestCase
 
         $itemsDAO = ItemsDAO::getInstance();
         $itemsDAO->setOrderedItems($orderedItems);
+
+        // data is stored in cookies as JSON, so everything is converted to standard objects.
+        // that's why we need to encode and decode if we want to compare the data.
         $this->assertEquals(json_decode(json_encode($orderedItems)), $itemsDAO->getOrderedItems());
     }
 }
