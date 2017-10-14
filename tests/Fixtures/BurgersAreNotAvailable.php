@@ -8,13 +8,6 @@ namespace Fixtures;
 class BurgersAreNotAvailable
 {
     /**
-     * Initializes fixture
-     */
-    public function __construct()
-    {
-    }
-
-    /**
      * Loads the fixture's mocked DAOs
      */
     public function load()

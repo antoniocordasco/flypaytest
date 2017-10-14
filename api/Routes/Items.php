@@ -9,13 +9,6 @@ use Mockery\Exception;
 class Items
 {
     /**
-     * Items constructor.
-     */
-    public function __construct()
-    {
-    }
-
-    /**
      * Controller action to list all items.
      *
      * @return array

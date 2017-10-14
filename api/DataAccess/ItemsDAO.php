@@ -8,13 +8,6 @@ use \Models\Item as Item;
 class ItemsDAO extends BaseDAO
 {
     /**
-     * ItemsDAO constructor.
-     */
-    public function __construct()
-    {
-    }
-
-    /**
      * Returns all items, even the ones that are not available.
      *
      * @return array
