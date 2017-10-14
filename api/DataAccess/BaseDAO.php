@@ -11,9 +11,9 @@ class BaseDAO
     {
         if (self::$instance) {
             return self::$instance;
-        } else {
-            return new static();
         }
+
+        return new static();
     }
 
     public static function setInstance($instance)

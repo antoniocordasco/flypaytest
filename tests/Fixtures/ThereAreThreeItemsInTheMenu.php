@@ -1,9 +1,6 @@
 <?php
 
-
 namespace Fixtures;
-
-
 
 /**
  * Defines application features from the specific context.
@@ -20,7 +17,6 @@ class ThereAreThreeItemsInTheMenu
     public function __construct()
     {
     }
-
 
     public function load()
     {

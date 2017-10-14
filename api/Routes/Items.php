@@ -1,17 +1,8 @@
 <?php
 
-/*
- * This file is part of PHP CS Fixer.
- * (c) Fabien Potencier <fabien@symfony.com>
- *     Dariusz Rumiński <dariusz.ruminski@gmail.com>
- * This source file is subject to the MIT license that is bundled
- * with this source code in the file LICENSE.
- */
-
 namespace Routes;
 
-use \DataAccess\ItemsDAO as ItemsDAO;
-
+use DataAccess\ItemsDAO as ItemsDAO;
 
 // base class with member properties and methods
 class Items
@@ -23,13 +14,14 @@ class Items
     public function listAction()
     {
         $items = ItemsDAO::getInstance();
+
         return $items->getAll();
     }
 
     public function orderItemAction($args)
     {
-        $id = (int)($args['id']);
-        $quantity = (int)($args['quantity']) ? (int)($args['quantity']) : 1;
+        $id = (int) ($args['id']);
+        $quantity = (int) ($args['quantity']) ? (int) ($args['quantity']) : 1;
 
         $itemsDAO = new ItemsDAO();
         $item = $itemsDAO->getItemById($id);
@@ -61,8 +53,8 @@ class Items
 
     public function cancelItemAction($args)
     {
-        $id = (int)($args['id']);
-        $quantity = (int)($args['quantity']) ? (int)($args['quantity']) : 1;
+        $id = (int) ($args['id']);
+        $quantity = (int) ($args['quantity']) ? (int) ($args['quantity']) : 1;
 
         $items = json_decode($_COOKIE['items']);
 
