@@ -44,6 +44,9 @@ class ItemsDAO extends BaseDAO
     public function setOrderedItems($items)
     {
         setcookie('items', json_encode($items), 0, '/');
+
+        // we need to also set the variable so that it can be accessed during the same request
+        $_COOKIE['items'] = json_encode($items);
     }
 
     /**
