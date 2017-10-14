@@ -10,7 +10,7 @@
 
 namespace Routes;
 
-
+use \DataAccess\ItemsDAO as ItemsDAO;
 
 
 // base class with member properties and methods
@@ -22,7 +22,7 @@ class Items
 
     public function listAction()
     {
-        $items = \DataAccess\Items::getInstance();
+        $items = ItemsDAO::getInstance();
         return $items->getAll();
     }
 
@@ -31,8 +31,8 @@ class Items
         $id = (int)($args['id']);
         $quantity = (int)($args['quantity']) ? (int)($args['quantity']) : 1;
 
-        $itemsDataAccess = new \DataAccess\Items();
-        $item = $itemsDataAccess->getItemById($id);
+        $itemsDAO = new ItemsDAO();
+        $item = $itemsDAO->getItemById($id);
 
         $items = json_decode($_COOKIE['items']);
 

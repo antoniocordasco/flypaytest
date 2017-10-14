@@ -12,12 +12,12 @@ require_once __DIR__ . '/vendor/autoload.php';
 spl_autoload_register(function ($class) {
     $path = str_replace('\\', '/', $class) . '.php';
 
-    if (is_file($path)) {
-        include $path;
+    if (is_file(__DIR__ . '/'. $path)) {
+        include __DIR__ . '/'. $path;
         return;
     }
-    if (is_file(dirname(__FILE__) . 'api/' . $path)) {
-        include dirname(__FILE__) . 'api/' . $path;
+    if (is_file(__DIR__ . '/api/' . $path)) {
+        include __DIR__ . '/api/' . $path;
         return;
     }
 });

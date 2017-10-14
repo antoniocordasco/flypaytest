@@ -29,8 +29,8 @@ class ThereAreThreeItemsInTheMenu
         $return[2] = new \Models\Item(2, 'Hamburger', 10);
         $return[3] = new \Models\Item(3, 'Chips', 3);
 
-        $mock = \Mockery::mock('\DataAccess\Items');
+        $mock = \Mockery::mock('\DataAccess\ItemsDAO');
         $mock->shouldReceive('getAll')->andReturn($return);
-        \DataAccess\Items::setInstance($mock);
+        \DataAccess\ItemsDAO::setInstance($mock);
     }
 }

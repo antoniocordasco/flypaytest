@@ -5,29 +5,11 @@ namespace DataAccess;
 use \Models\Item as Item;
 
 // base class with member properties and methods
-class Items
+class ItemsDAO extends BaseDAO
 {
-    private static $instance;
-
     public function __construct()
     {
     }
-
-    public static function getInstance()
-    {
-        if (self::$instance) {
-            return self::$instance;
-        } else {
-            return new self();
-        }
-    }
-
-
-    public static function setInstance($instance)
-    {
-        self::$instance = $instance;
-    }
-
 
     public function getAll()
     {
