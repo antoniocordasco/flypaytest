@@ -9,9 +9,9 @@ abstract class Base
      */
     public function run()
     {
-        $split = explode('/', trim($_SERVER['REQUEST_URI'], '/'));
+        $split = explode('?', $_SERVER['REQUEST_URI']);
+        $split = explode('/', trim($split[0], '/'));
         $action = $split[1] . 'Action';
-
         header('Content-type: application/json');
 
         try {
