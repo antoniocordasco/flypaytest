@@ -22,7 +22,7 @@ class ItemsTest extends \PHPUnit_Framework_TestCase
         $return[3] = new \Models\Item(3, 'Chips', 3);
 
         $itemsDAO = ItemsDAO::getInstance();
-        $this->assertSame($return, $itemsDAO->getAll());
+        $this->assertEquals($return, $itemsDAO->getAll());
     }
 
     /**
@@ -33,13 +33,13 @@ class ItemsTest extends \PHPUnit_Framework_TestCase
         $itemsDAO = ItemsDAO::getInstance();
 
         $salad = new \Models\Item(1, 'Salad', 7);
-        $this->assertSame($salad, $itemsDAO->getItemById(1));
+        $this->assertEquals($salad, $itemsDAO->getItemById(1));
 
         $burger = new \Models\Item(2, 'Hamburger', 10);
-        $this->assertSame($burger, $itemsDAO->getItemById(2));
+        $this->assertEquals($burger, $itemsDAO->getItemById(2));
 
         $chips = new \Models\Item(3, 'Chips', 3);
-        $this->assertSame($chips, $itemsDAO->getItemById(3));
+        $this->assertEquals($chips, $itemsDAO->getItemById(3));
     }
 
     /**
@@ -54,6 +54,6 @@ class ItemsTest extends \PHPUnit_Framework_TestCase
 
         // data is stored in cookies as JSON, so everything is converted to standard objects.
         // that's why we need to encode and decode if we want to compare the data.
-        $this->assertSame(json_decode(json_encode($orderedItems)), $itemsDAO->getOrderedItems());
+        $this->assertEquals(json_decode(json_encode($orderedItems)), $itemsDAO->getOrderedItems());
     }
 }

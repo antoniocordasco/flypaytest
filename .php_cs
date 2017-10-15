@@ -28,7 +28,6 @@ $config = PhpCsFixer\Config::create()
         'no_useless_return' => true,
         'ordered_class_elements' => true,
         'ordered_imports' => true,
-        'php_unit_strict' => true,
         'php_unit_test_class_requires_covers' => true,
         'phpdoc_add_missing_param_annotation' => true,
         'phpdoc_order' => true,
