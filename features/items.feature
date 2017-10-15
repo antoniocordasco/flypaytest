@@ -39,3 +39,21 @@ Feature: items
     Given that "burgers are not available"
     When I request "GET /items/orderItem/?id=2&quantity=3"
     Then the response code should be "403"
+
+  Scenario: Cancel item before any payments
+    Given that "two chips have been ordered without any payments being made"
+    When I request "GET /items/cancelItem/?id=3&quantity=1"
+    Then I should get:
+            """
+            1
+            """
+
+  Scenario: Cancel item after payment
+    Given that "two chips have been ordered and a payment has been made"
+    When I request "GET /items/cancelItem/?id=3&quantity=1"
+    Then the response code should be "403"
+
+  Scenario: Cancel item that has not been ordered
+    Given that "nothing has been ordered"
+    When I request "GET /items/cancelItem/?id=3&quantity=1"
+    Then the response code should be "403"
