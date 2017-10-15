@@ -20,6 +20,8 @@ class Items extends Base
     /**
      * Controller action to order an item.
      *
+     * @throws \Exception
+     *
      * @param $args
      * @return int|string
      */
@@ -50,6 +52,7 @@ class Items extends Base
      * Controller action to cancel all orders.
      *
      * @param $args
+     * @return int
      */
     public function cancelAllItemsAction($args)
     {
