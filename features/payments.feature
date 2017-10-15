@@ -38,3 +38,29 @@ Feature: payments
               "tip": 0
           }
             """
+
+  Scenario: Get the bill when it has been fully paid with no tip
+    Given that "one burger has been ordered and paid"
+    When I request "GET /payments/bill"
+    Then I should get:
+            """
+            {
+              "total": 10,
+              "toPay": 0,
+              "closed": true,
+              "tip": 0
+          }
+            """
+
+  Scenario: Get the bill when it has been fully paid with tip
+    Given that "one burger has been ordered and paid plus tip"
+    When I request "GET /payments/bill"
+    Then I should get:
+            """
+            {
+              "total": 10,
+              "toPay": 0,
+              "closed": true,
+              "tip": 2
+          }
+            """
