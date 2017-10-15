@@ -26,7 +26,7 @@ class Payments extends Base
         $paymentsDAO = PaymentsDAO::getInstance();
         $paid = $paymentsDAO->getTotalAmountPaid();
 
-        return new Bill($total, ($total - $paid));
+        return new Bill($total, ($total > $paid) ? $total - $paid : 0, ($paid > $total) ? $paid - $total : 0);
     }
 
     /**
@@ -39,6 +39,11 @@ class Payments extends Base
     {
         $amount = (int)$args['amount'];
 
+
+        $paymentsDAO = PaymentsDAO::getInstance();
+        $paymentsDAO->savePayment($amount);
+        $paid = $paymentsDAO->getTotalAmountPaid();
+
         $itemsDAO = ItemsDAO::getInstance();
         $items = $itemsDAO->getOrderedItems();
         $total = 0;
@@ -46,6 +51,6 @@ class Payments extends Base
             $total += $item->price;
         }
 
-        return new Bill($total, ($total - $amount));
+        return new Bill($total, ($total > $paid) ? $total - $paid : 0, ($paid > $total) ? $paid - $total : 0);
     }
 }
