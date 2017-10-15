@@ -7,7 +7,9 @@ Feature: payments
             """
             {
               "total": 30,
-              "toPay": 30
+              "toPay": 30,
+              "closed": false,
+              "tip": 0
           }
             """
 
@@ -18,7 +20,9 @@ Feature: payments
             """
             {
               "total": 30,
-              "toPay": 20
+              "toPay": 20,
+              "closed": false,
+              "tip": 0
           }
             """
 
@@ -29,6 +33,8 @@ Feature: payments
             """
             {
               "total": 30,
-              "toPay": 20
+              "toPay": 20,
+              "closed": false,
+              "tip": 0
           }
             """
