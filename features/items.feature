@@ -57,3 +57,16 @@ Feature: items
     Given that "nothing has been ordered"
     When I request "GET /items/cancelItem/?id=3&quantity=1"
     Then the response code should be "403"
+
+  Scenario: Cancel all items before any payments
+    Given that "two chips have been ordered without any payments being made and all get cancelled"
+    When I request "GET /items/cancelAllItems/"
+    Then I should get:
+            """
+            {"itemsOrdered": 0}
+            """
+
+  Scenario: Cancel item after payment
+    Given that "two chips have been ordered and a payment has been made"
+    When I request "GET /items/cancelAllItems/"
+    Then the response code should be "403"
