@@ -2,7 +2,8 @@
 
 namespace Routes;
 
-use DataAccess\ItemsDAO as ItemsDAO;
+use DataAccess\ItemsDAO;
+use DataAccess\PaymentsDAO;
 use Models\Bill;
 
 class Payments extends Base
@@ -22,7 +23,10 @@ class Payments extends Base
             $total += $item->price;
         }
 
-        return new Bill($total, $total);
+        $paymentsDAO = PaymentsDAO::getInstance();
+        $paid = $paymentsDAO->getTotalAmountPaid();
+
+        return new Bill($total, ($total - $paid));
     }
 
     /**

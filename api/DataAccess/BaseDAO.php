@@ -5,8 +5,6 @@ namespace DataAccess;
 // base class with member properties and methods
 class BaseDAO
 {
-    private static $instance;
-
     /**
      * Returns the current instance of the DAO. It will be a mocked DAO when running behat tests.
      *
@@ -14,8 +12,8 @@ class BaseDAO
      */
     public static function getInstance()
     {
-        if (self::$instance) {
-            return self::$instance;
+        if (static::$instance) {
+            return static::$instance;
         }
 
         return new static();
@@ -28,6 +26,6 @@ class BaseDAO
      */
     public static function setInstance($instance)
     {
-        self::$instance = $instance;
+        static::$instance = $instance;
     }
 }

@@ -4,6 +4,7 @@ namespace DataAccess;
 
 class PaymentsDAO extends BaseDAO
 {
+    public static $instance;
 
     public function savePayment($amount)
     {

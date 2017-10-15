@@ -7,6 +7,8 @@ use \Models\Item as Item;
 // base class with member properties and methods
 class ItemsDAO extends BaseDAO
 {
+    public static $instance;
+
     /**
      * Returns all items, even the ones that are not available.
      *
