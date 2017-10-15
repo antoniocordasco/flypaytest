@@ -15,8 +15,6 @@ class Payments extends Base
      */
     public function billAction()
     {
-
-
         $itemsDAO = ItemsDAO::getInstance();
         $items = $itemsDAO->getOrderedItems();
         $total = 0;
@@ -25,5 +23,25 @@ class Payments extends Base
         }
 
         return new Bill($total, $total);
+    }
+
+    /**
+     * Controller action to make a payment.
+     *
+     * @param $args
+     * @return Bill
+     */
+    public function payAction($args)
+    {
+        $amount = (int)$args['amount'];
+
+        $itemsDAO = ItemsDAO::getInstance();
+        $items = $itemsDAO->getOrderedItems();
+        $total = 0;
+        foreach ($items as $item) {
+            $total += $item->price;
+        }
+
+        return new Bill($total, ($total - $amount));
     }
 }
