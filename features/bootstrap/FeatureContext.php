@@ -22,27 +22,12 @@ class FeatureContext implements Context
     }
 
     /**
-     * @Given there are three items in the menu
+     * @Given /^that "([^"]*)"$/
      */
-    public function thereAreThreeItemsInTheMenu()
+    public function loadFixture($resource)
     {
-        $this->fixtureClass = 'ThereAreThreeItemsInTheMenu';
-    }
 
-    /**
-     * @Given burgers are available
-     */
-    public function burgersAreAvailable()
-    {
-        $this->fixtureClass = 'BurgersAreAvailable';
-    }
-
-    /**
-     * @Given burgers are not available
-     */
-    public function burgersAreNotAvailable()
-    {
-        $this->fixtureClass = 'BurgersAreNotAvailable';
+        $this->fixtureClass = str_replace(' ', '', ucwords($resource));
     }
 
     /**

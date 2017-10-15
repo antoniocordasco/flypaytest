@@ -1,7 +1,7 @@
 Feature: items
 
   Scenario: List all items
-    Given there are three items in the menu
+    Given that "there are three items in the menu"
     When I request "GET /items/list"
     Then I should get:
             """
@@ -28,7 +28,7 @@ Feature: items
             """
 
   Scenario: Order an item that is available
-    Given burgers are available
+    Given that "burgers are available"
     When I request "GET /items/orderItem/?id=2&quantity=3"
     Then I should get:
             """
@@ -36,6 +36,6 @@ Feature: items
             """
 
   Scenario: Order an item that is not available
-    Given burgers are not available
+    Given that "burgers are not available"
     When I request "GET /items/orderItem/?id=2&quantity=3"
     Then the response code should be "403"
