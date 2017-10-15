@@ -4,6 +4,6 @@ require '../common.php';
 
 $split = explode('/', trim($_SERVER['REQUEST_URI'], '/'));
 
-$className = ucfirst(strtolower($split[0]));
-$route = new \Routes\Items();
+$className = '\\Routes\\' . ucfirst(strtolower($split[0]));
+$route = new $className();
 $route->run();
