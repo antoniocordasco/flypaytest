@@ -9,7 +9,7 @@ use DataAccess\ItemsDAO as ItemsDAO;
 /**
  * @coversNothing
  */
-class ItemsTest extends \PHPUnit_Framework_TestCase
+class ItemsDAOTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Unit test for ItemsDAO::testGetAll.
