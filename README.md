@@ -23,3 +23,6 @@ Integration tests are done with Behat and Mockery. A special header called X-MOC
 so that the system knows which fixture to load. Inside the fixture every call to the DAO layer is mocked.
 This is because the DAOs are tested by the unit tests. The integration tests only cover the controllers logic.
 
+All the data is being stored in cookies, because the exercise does not allow the use of a database.
+For this reason, we need to use the --stderr flag when running unit tests, because PHPUnit outputs
+some text that would normally prevent the system from setting the cookies (done through headers).
