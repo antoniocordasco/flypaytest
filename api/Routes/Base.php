@@ -18,6 +18,7 @@ abstract class Base
             echo json_encode($this->$action($_GET));
         } catch (\Exception $e) {
             http_response_code($e->getCode());
+            echo json_encode(['code' + $e->getCode(), 'message' => $e->getMessage()]);
         }
     }
 }
