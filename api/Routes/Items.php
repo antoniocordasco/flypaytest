@@ -3,7 +3,6 @@
 namespace Routes;
 
 use DataAccess\ItemsDAO as ItemsDAO;
-use Mockery\Exception;
 
 // base class with member properties and methods
 class Items
@@ -45,7 +44,7 @@ class Items
 
             return count($items);
         } else {
-            throw new Exception('The requested item is not available', 403);
+            throw new \Exception('The requested item is not available', 403);
         }
     }
 
@@ -106,7 +105,7 @@ class Items
 
         try {
             echo json_encode($this->$action($_GET));
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             http_response_code($e->getCode());
         }
     }
