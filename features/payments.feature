@@ -10,3 +10,14 @@ Feature: payments
               "toPay": 30
           }
             """
+
+  Scenario: Make a payment
+    Given that "three burgers have been ordered"
+    When I request "GET /payments/pay?amount=10"
+    Then I should get:
+            """
+            {
+              "total": 30,
+              "toPay": 20
+          }
+            """
