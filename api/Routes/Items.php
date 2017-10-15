@@ -4,7 +4,6 @@ namespace Routes;
 
 use DataAccess\ItemsDAO as ItemsDAO;
 
-// base class with member properties and methods
 class Items
 {
     /**
