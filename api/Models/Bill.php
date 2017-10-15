@@ -11,14 +11,16 @@ class Bill
 
     /**
      * Bill constructor.
-     * @param int $total
-     * @param int $toPay
+     *
+     * @param int   $total
+     * @param int   $toPay
+     * @param mixed $tip
      */
     public function __construct($total, $toPay, $tip = 0)
     {
         $this->total = $total;
         $this->toPay = $toPay;
-        $this->closed = ($this->toPay == 0);
+        $this->closed = (0 === $this->toPay);
         $this->tip = $tip;
     }
 }

@@ -8,7 +8,7 @@ namespace Fixtures;
 class BurgersAreAvailable
 {
     /**
-     * Loads the fixture's mocked DAOs
+     * Loads the fixture's mocked DAOs.
      */
     public function load()
     {
