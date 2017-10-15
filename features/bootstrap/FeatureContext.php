@@ -54,7 +54,7 @@ class FeatureContext implements Context
     /**
      * @Then I should get:
      */
-    public function iShouldGet2(PyStringNode $string)
+    public function iShouldGet(PyStringNode $string)
     {
         if (json_decode($string) != json_decode($this->_response->getBody(true))) {
             throw new Exception("Wrong response: " . $this->_response->getBody(true) . "\n");
