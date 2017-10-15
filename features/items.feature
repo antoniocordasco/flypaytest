@@ -32,7 +32,7 @@ Feature: items
     When I request "GET /items/orderItem/?id=2&quantity=3"
     Then I should get:
             """
-            3
+            {"itemsOrdered": 3}
             """
 
   Scenario: Order an item that is not available
@@ -45,7 +45,7 @@ Feature: items
     When I request "GET /items/cancelItem/?id=3&quantity=1"
     Then I should get:
             """
-            1
+            {"itemsOrdered": 1}
             """
 
   Scenario: Cancel item after payment

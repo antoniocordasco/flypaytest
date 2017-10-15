@@ -48,7 +48,6 @@ class FeatureContext implements Context
         } catch (Exception $e) {
             $this->_statusCode = $e->getCode();
         }
-
     }
 
     /**
@@ -56,8 +55,12 @@ class FeatureContext implements Context
      */
     public function iShouldGet(PyStringNode $string)
     {
-        if (json_decode($string) != json_decode($this->_response->getBody(true))) {
-            throw new Exception("Wrong response: " . $this->_response->getBody(true) . "\n");
+        if (is_object(json_decode($string)) || is_array(json_decode($string))) {
+            if (json_decode($string) != json_decode($this->_response->getBody(true))) {
+                throw new Exception("Wrong response: " . $this->_response->getBody(true) . "\n");
+            }
+        } else {
+            throw new Exception("Wrong feature format");
         }
     }
 

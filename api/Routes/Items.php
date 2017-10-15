@@ -2,7 +2,8 @@
 
 namespace Routes;
 
-use DataAccess\ItemsDAO as ItemsDAO;
+use DataAccess\ItemsDAO;
+use DataAccess\PaymentsDAO;
 
 class Items extends Base
 {
@@ -42,7 +43,7 @@ class Items extends Base
 
             setcookie('items', json_encode($items), 0, '/');
 
-            return count($items);
+            return ['itemsOrdered' =>count($items)];
         } else {
             throw new \Exception('The requested item is not available', 403);
         }
@@ -58,7 +59,7 @@ class Items extends Base
     {
         $itemsDAO = ItemsDAO::getInstance();
         $itemsDAO->setOrderedItems([]);
-        return 0;
+        return ['itemsOrdered' => 0];
     }
 
     /**
@@ -72,6 +73,13 @@ class Items extends Base
         $id = (int)($args['id']);
         $quantity = (int)($args['quantity']) ? (int)($args['quantity']) : 1;
 
+
+        $paymentsDAO = PaymentsDAO::getInstance();
+        $amount = $paymentsDAO->getTotalAmountPaid();
+        if ($amount > 0) {
+            throw new \Exception('A payment has already been made', 403);
+        }
+
         $itemsDAO = ItemsDAO::getInstance();
         $items = $itemsDAO->getOrderedItems();
 
@@ -84,13 +92,16 @@ class Items extends Base
             }
         }
 
+        if ($deleted < $quantity) {
+            throw new \Exception('Not all items to be cancelled have actually been previously ordered', 403);
+        }
+
         $updatedItems = [];
         foreach ($items as $item) {
             $updatedItems[] = $item;
         }
-
         $itemsDAO->setOrderedItems($updatedItems);
 
-        return count($items);
+        return ['itemsOrdered' => count($updatedItems)];
     }
 }
