@@ -13,9 +13,8 @@ class Items
      */
     public function listAction()
     {
-        $items = ItemsDAO::getInstance();
-
-        return $items->getAll();
+        $itemsDAO = ItemsDAO::getInstance();
+        return $itemsDAO->getAll();
     }
 
     /**
