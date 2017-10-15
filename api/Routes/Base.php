@@ -15,10 +15,15 @@ abstract class Base
         header('Content-type: application/json');
 
         try {
-            echo json_encode($this->$action($_GET));
+            if (method_exists($this, $action)) {
+                echo json_encode($this->$action($_GET));
+            } else {
+                http_response_code(404);
+                echo json_encode(['code' => 404, 'message' => 'Wrong API method']);
+            }
         } catch (\Exception $e) {
             http_response_code($e->getCode());
-            echo json_encode(['code' + $e->getCode(), 'message' => $e->getMessage()]);
+            echo json_encode(['code' => $e->getCode(), 'message' => $e->getMessage()]);
         }
     }
 }
