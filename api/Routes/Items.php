@@ -57,8 +57,16 @@ class Items extends Base
      */
     public function cancelAllItemsAction($args)
     {
+        $paymentsDAO = PaymentsDAO::getInstance();
+        $amount = $paymentsDAO->getTotalAmountPaid();
+
+        if ($amount > 0) {
+            throw new \Exception('A payment has already been made', 403);
+        }
+
         $itemsDAO = ItemsDAO::getInstance();
         $itemsDAO->setOrderedItems([]);
+
         return ['itemsOrdered' => 0];
     }
 
@@ -72,7 +80,6 @@ class Items extends Base
     {
         $id = (int)($args['id']);
         $quantity = (int)($args['quantity']) ? (int)($args['quantity']) : 1;
-
 
         $paymentsDAO = PaymentsDAO::getInstance();
         $amount = $paymentsDAO->getTotalAmountPaid();
